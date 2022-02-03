@@ -1,6 +1,7 @@
 # Ristretto
 [![Go Reference](https://pkg.go.dev/badge/github.com/etecs-ru/ristretto.svg)](https://pkg.go.dev/github.com/etecs-ru/ristretto)
 [![Go Report Card](https://img.shields.io/badge/go%20report-A%2B-brightgreen)](https://goreportcard.com/report/github.com/etecs-ru/ristretto)
+[![Release](https://img.shields.io/github/release/etecs-ru/ristretto.svg)](https://github.com/etecs-ru/ristretto/releases/latest)
 [![Coverage](https://codecov.io/gh/etecs-ru/ristretto/branch/master/graph/badge.svg?token=UDWD7LBVTK)](https://codecov.io/gh/etecs-ru/ristretto)
 ![Tests](https://github.com/etecs-ru/ristretto/workflows/build/badge.svg)
 
