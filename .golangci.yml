@@ -169,6 +169,9 @@ linters-settings:
     # Results from all guards are aggregated together.
     additional-guards:
       - list-type: denylist
+        packages:
+          - github.com/pkg/error
+      - list-type: denylist
         include-go-root: false
         packages:
           - github.com/stretchr/testify
@@ -1409,7 +1412,6 @@ linters:
     - funlen
     - gci
     - gochecknoglobals
-    - gochecknoinits
     - gocognit
     - goconst
     - gocritic

@@ -307,5 +307,6 @@ func expandPath(path string) (string, error) {
 	if err != nil {
 		return "", errors.Wrap(err, "Failed to generate absolute path")
 	}
+
 	return path, nil
 }
