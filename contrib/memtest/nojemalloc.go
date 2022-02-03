@@ -1,4 +1,5 @@
-//+build !jemalloc
+//go:build !jemalloc
+// +build !jemalloc
 
 package main
 
