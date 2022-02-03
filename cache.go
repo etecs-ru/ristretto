@@ -38,7 +38,6 @@ const itemSize = int64(unsafe.Sizeof(storeItem{}))
 // CacheInterface exposes the common cache functions for the purpose of mocking
 // in unit tests.
 type CacheInterface interface {
-
 	// Get returns the value (if any) and a boolean representing whether the
 	// value was found or not. The value can be nil and the boolean can be true at
 	// the same time.
