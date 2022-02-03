@@ -18,7 +18,6 @@ package z
 
 import (
 	"fmt"
-	"io/ioutil"
 	"math"
 	"math/rand"
 	"os"
@@ -61,10 +60,7 @@ func TestTree(t *testing.T) {
 }
 
 func TestTreePersistent(t *testing.T) {
-	dir, err := ioutil.TempDir("", "")
-	require.NoError(t, err)
-	defer os.RemoveAll(dir)
-	path := filepath.Join(dir, "tree.buf")
+	path := filepath.Join(t.TempDir(), "tree.buf")
 
 	// Create a tree and validate the data.
 	bt1, err := NewTreePersistent(path)
@@ -438,8 +434,9 @@ func BenchmarkSearch(b *testing.B) {
 	}
 
 	jumpBy := []int{8, 16, 32, 64, 128, 196, 255}
+	tempDir := b.TempDir()
 	for _, sz := range jumpBy {
-		f, err := ioutil.TempFile(".", "tree")
+		f, err := os.CreateTemp(tempDir, "tree")
 		require.NoError(b, err)
 
 		mf, err := OpenMmapFileUsing(f, pageSize, true)

@@ -70,7 +70,7 @@ func mmap(fd *os.File, write bool, size int64) ([]byte, error) {
 
 	// Slice memory layout
 	// Copied this snippet from golang/sys package
-	var sl = struct {
+	sl := struct {
 		addr uintptr
 		len  int
 		cap  int

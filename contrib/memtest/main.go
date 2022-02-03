@@ -18,6 +18,7 @@ package main
 
 // #include <stdlib.h>
 import "C"
+
 import (
 	"fmt"
 	"math/rand"
@@ -53,8 +54,11 @@ var (
 
 	cycles int64 = 16
 )
-var numbytes int64
-var counter int64
+
+var (
+	numbytes int64 //nolint:unused,varcheck,gochecknoglobals,lll,deadcode // adopt fork, do not touch it
+	counter  int64 //nolint:unused,varcheck,gochecknoglobals,lll,deadcode // adopt fork, do not touch it
+)
 
 func newS(sz int) *S {
 	var s *S

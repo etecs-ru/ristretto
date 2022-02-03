@@ -10,12 +10,14 @@ import (
 )
 
 type node struct {
-	val  int
 	next *node
+	val  int
 }
 
-var nodeSz = int(unsafe.Sizeof(node{}))
-var alloc *z.Allocator
+var (
+	nodeSz = int(unsafe.Sizeof(node{})) //nolint:unused,varcheck,gochecknoglobals,lll,deadcode,revive // adopt fork, do not touch it
+	alloc  *z.Allocator                 //nolint:unused,varcheck,gochecknoglobals,lll,deadcode,revive // adopt fork, do not touch it
+)
 
 func printNode(n *node) {
 	if n == nil {

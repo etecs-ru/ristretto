@@ -13,6 +13,7 @@ package z
 #include <jemalloc/jemalloc.h>
 */
 import "C"
+
 import (
 	"bytes"
 	"fmt"
@@ -46,8 +47,10 @@ type dalloc struct {
 	sz int
 }
 
-var dallocsMu sync.Mutex
-var dallocs map[unsafe.Pointer]*dalloc
+var (
+	dallocsMu sync.Mutex
+	dallocs   map[unsafe.Pointer]*dalloc
+)
 
 func init() {
 	// By initializing dallocs, we can start tracking allocations and deallocations via z.Calloc.

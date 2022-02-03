@@ -80,10 +80,9 @@ func stringFor(t metricType) string {
 
 // Metrics is a snapshot of performance statistics for the lifetime of a cache instance.
 type Metrics struct {
-	all [doNotUse][]*uint64
-
+	life *z.HistogramData
+	all  [doNotUse][]*uint64
 	mu   sync.RWMutex
-	life *z.HistogramData // Tracks the life expectancy of a key.
 }
 
 // collectMetrics just creates a new *Metrics instance and adds the pointers
