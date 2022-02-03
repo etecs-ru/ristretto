@@ -75,15 +75,16 @@ output:
   # Example: "checkstyle:report.json,colored-line-number"
   #
   # Default: colored-line-number
-  format: json
+  # format: json
+  format: colored-line-number
 
   # Print lines of code with issue.
   # Default: true
-  print-issued-lines: false
+  print-issued-lines: true
 
   # Print linter name in the end of issue text.
   # Default: true
-  print-linter-name: false
+  print-linter-name: true
 
   # Make issues output unique by line.
   # Default: true
@@ -94,7 +95,7 @@ output:
   path-prefix: ""
 
   # Sort results by: filepath, line and column.
-  sort-results: false
+  sort-results: true
 
 
 # All available settings of specific linters.
@@ -204,12 +205,6 @@ linters-settings:
     # see https://github.com/kisielk/errcheck#the-deprecated-method for details
     ignore: fmt:.*,io/ioutil:^Read.*
 
-    # DEPRECATED use exclude-functions instead.
-    #
-    # Path to a file containing a list of functions to exclude from checking.
-    # See https://github.com/kisielk/errcheck#excluding-functions for details.
-    exclude: /path/to/file.txt
-
     # List of functions to exclude from checking, where each entry is a single function to exclude.
     # See https://github.com/kisielk/errcheck#excluding-functions for details.
     exclude-functions:
@@ -298,7 +293,7 @@ linters-settings:
     # Put imports beginning with prefix after 3rd-party packages.
     # Only support one prefix.
     # If not set, use `goimports.local-prefixes`.
-    local-prefixes: github.com/org/project
+    local-prefixes: github.com/etecs-ru/ristretto
 
   gocognit:
     # Minimal code complexity to report
@@ -336,16 +331,11 @@ linters-settings:
     # See https://go-critic.github.io/overview#checks-overview.
     # To check which checks are enabled run `GL_DEBUG=gocritic golangci-lint run`.
     # By default, list of stable checks is used.
-    enabled-checks:
-      - nestingReduce
-      - unnamedResult
-      - ruleguard
-      - truncateCmp
+    #enabled-checks:
 
     # Which checks should be disabled; can't be combined with 'enabled-checks'.
     # Default: []
     disabled-checks:
-      - regexpMust
 
     # Enable multiple checks by tags, run `GL_DEBUG=gocritic golangci-lint run` to see all tags and checks.
     # See https://github.com/go-critic/go-critic#usage -> section "Tags".
@@ -357,11 +347,7 @@ linters-settings:
       - experimental
       - opinionated
     disabled-tags:
-      - diagnostic
-      - style
-      - performance
-      - experimental
-      - opinionated
+
 
     # Settings passed to gocritic.
     # The settings key is the name of a supported gocritic checker.
@@ -425,7 +411,7 @@ linters-settings:
         # If a path is relative, it is relative to the directory where the golangci-lint command is executed.
         # The special '${configDir}' variable is substituted with the absolute directory containing the golangci config file.
         # Glob patterns such as 'rules-*.go' may be specified.
-        rules: '${configDir}/ruleguard/rules-*.go,${configDir}/myrule1.go'
+        #rules: '${configDir}/ruleguard/rules-*.go,${configDir}/myrule1.go'
       tooManyResultsChecker:
         # Maximum number of results.
         # Default: 5
@@ -486,46 +472,11 @@ linters-settings:
     # Default: false
     extra-rules: true
 
-  goheader:
-    # Supports two types 'const` and `regexp`.
-    # Values can be used recursively.
-    values:
-      const:
-        # Define here const type values in format k:v.
-        # For example:
-        COMPANY: MY COMPANY
-      regexp:
-        # Define here regexp type values.
-        # for example:
-        AUTHOR: .*@mycompany\.com
-    # The template use for checking.
-    template: |-
-      # Put here copyright header template for source code files
-      # For example:
-      # Note: {{ YEAR }} is a builtin value that returns the year relative to the current machine time.
-      #
-      # {{ AUTHOR }} {{ COMPANY }} {{ YEAR }}
-      # SPDX-License-Identifier: Apache-2.0
-
-      # Licensed under the Apache License, Version 2.0 (the "License");
-      # you may not use this file except in compliance with the License.
-      # You may obtain a copy of the License at:
-
-      #   http://www.apache.org/licenses/LICENSE-2.0
-
-      # Unless required by applicable law or agreed to in writing, software
-      # distributed under the License is distributed on an "AS IS" BASIS,
-      # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-      # See the License for the specific language governing permissions and
-      # limitations under the License.
-    # As alternative of directive 'template', you may put the path to file with the template source.
-    # Useful if you need to load the template from a specific file.
-    template-path: /path/to/my/template.tmpl
 
   goimports:
     # Put imports beginning with prefix after 3rd-party packages.
     # It's a comma-separated list of prefixes.
-    local-prefixes: github.com/org/project
+    local-prefixes: github.com/etecs-ru/ristretto
 
   golint:
     # Minimal confidence for issues.
@@ -602,9 +553,7 @@ linters-settings:
       local_replace_directives: false
 
   gosimple:
-    # Select the Go version to target.
-    # Default: 1.13
-    go: "1.15"
+    go: "1.17"
     # https://staticcheck.io/docs/options#checks
     checks: [ "all" ]
 
@@ -646,36 +595,7 @@ linters-settings:
     # To specify a set of rules to explicitly exclude.
     # Available rules: https://github.com/securego/gosec#available-rules
     excludes:
-      - G101
-      - G102
-      - G103
-      - G104
-      - G106
-      - G107
-      - G108
-      - G109
-      - G110
-      - G201
-      - G202
-      - G203
-      - G204
-      - G301
-      - G302
-      - G303
-      - G304
-      - G305
-      - G306
-      - G307
-      - G401
-      - G402
-      - G403
-      - G404
-      - G501
-      - G502
-      - G503
-      - G504
-      - G505
-      - G601
+
 
     # Exclude generated files
     # Default: false
@@ -715,14 +635,8 @@ linters-settings:
       printf:
         # Run `go tool vet help printf` to see available settings for `printf` analyzer.
         funcs:
-          - (github.com/golangci/golangci-lint/pkg/logutils.Log).Infof
-          - (github.com/golangci/golangci-lint/pkg/logutils.Log).Warnf
-          - (github.com/golangci/golangci-lint/pkg/logutils.Log).Errorf
-          - (github.com/golangci/golangci-lint/pkg/logutils.Log).Fatalf
 
-    # Disable all analyzers.
-    # Default: false
-    disable-all: true
+
     # Enable analyzers by name.
     # Run `go tool vet help` to see all analyzers.
     enable:
@@ -765,46 +679,10 @@ linters-settings:
 
     # Enable all analyzers.
     # Default: false
-    enable-all: true
+    # enable-all: true
     # Disable analyzers by name.
     # Run `go tool vet help` to see all analyzers.
     disable:
-      - asmdecl
-      - assign
-      - atomic
-      - atomicalign
-      - bools
-      - buildtag
-      - cgocall
-      - composites
-      - copylocks
-      - deepequalerrors
-      - errorsas
-      - fieldalignment
-      - findcall
-      - framepointer
-      - httpresponse
-      - ifaceassert
-      - loopclosure
-      - lostcancel
-      - nilfunc
-      - nilness
-      - printf
-      - reflectvaluecompare
-      - shadow
-      - shift
-      - sigchanyzer
-      - sortslice
-      - stdmethods
-      - stringintconv
-      - structtag
-      - testinggoroutine
-      - tests
-      - unmarshal
-      - unreachable
-      - unsafeptr
-      - unusedresult
-      - unusedwrite
 
   grouper:
     # Require the use of a single global 'const' declaration only.
@@ -853,17 +731,7 @@ linters-settings:
     no-extra-aliases: true
     # List of aliases
     alias:
-      # Using `servingv1` alias for `knative.dev/serving/pkg/apis/serving/v1` package.
-      - pkg: knative.dev/serving/pkg/apis/serving/v1
-        alias: servingv1
-      # Using `autoscalingv1alpha1` alias for `knative.dev/serving/pkg/apis/autoscaling/v1alpha1` package.
-      - pkg: knative.dev/serving/pkg/apis/autoscaling/v1alpha1
-        alias: autoscalingv1alpha1
-      # You can specify the package path by regular expression,
-      # and alias by regular expression expansion syntax like below.
-      # see https://github.com/julz/importas#use-regular-expression for details
-      - pkg: knative.dev/serving/pkg/apis/(\w+)/(v[\w\d]+)
-        alias: $1$2
+
 
   ireturn:
     # ireturn allows using `allow` and `reject` settings at the same time.
@@ -884,9 +752,6 @@ linters-settings:
       # You can specify idiomatic endings for interface
       - (or|er)$
 
-    # reject-list of interfaces
-    reject:
-      - github.com\/user\/package\/v4\.Type
 
   lll:
     # Max line length, lines longer will be reported.
@@ -1521,20 +1386,6 @@ linters-settings:
     # Default: true
     strict-append: true
 
-  # The custom section can be used to define linter plugins to be loaded at runtime.
-  # See README documentation for more info.
-  custom:
-    # Each custom linter should have a unique name.
-    example:
-      # The path to the plugin *.so. Can be absolute or local.
-      # Required for each custom linter.
-      path: /path/to/example.so
-      # The description of the linter.
-      # Optional.
-      description: This is an example usage of a plugin linter.
-      # Intended to point to the repo location of the linter.
-      # Optional.
-      original-url: github.com/golangci/example-linter
 
 
 linters:
@@ -1576,7 +1427,6 @@ linters:
     - gofumpt
     - goheader
     - goimports
-    - golint
     - gomnd
     - gomoddirectives
     - gomodguard
@@ -1587,11 +1437,9 @@ linters:
     - ifshort
     - importas
     - ineffassign
-    - interfacer
     - ireturn
     - lll
     - makezero
-    - maligned
     - misspell
     - nakedret
     - nestif
@@ -1606,7 +1454,6 @@ linters:
     - promlinter
     - revive
     - rowserrcheck
-    - scopelint
     - sqlclosecheck
     - staticcheck
     - structcheck
@@ -1628,110 +1475,11 @@ linters:
     - wsl
 
   # Enable all available linters.
-  enable-all: true
+  # enable-all: true
   # Disable specific linter
   # https://golangci-lint.run/usage/linters/#disabled-by-default-linters--e--enable
   disable:
-    - asciicheck
-    - bidichk
-    - bodyclose
-    - contextcheck
-    - cyclop
-    - deadcode
-    - depguard
-    - dogsled
-    - dupl
-    - durationcheck
-    - errcheck
-    - errname
-    - errorlint
-    - exhaustive
-    - exhaustivestruct
-    - exportloopref
-    - forbidigo
-    - forcetypeassert
-    - funlen
-    - gci
-    - gochecknoglobals
-    - gochecknoinits
-    - gocognit
-    - goconst
-    - gocritic
-    - gocyclo
-    - godot
-    - godox
-    - goerr113
-    - gofmt
-    - gofumpt
-    - goheader
-    - goimports
-    - golint
-    - gomnd
-    - gomoddirectives
-    - gomodguard
-    - goprintffuncname
-    - gosec
-    - gosimple
-    - govet
-    - ifshort
-    - importas
-    - ineffassign
-    - interfacer
-    - ireturn
-    - lll
-    - makezero
-    - maligned
-    - misspell
-    - nakedret
-    - nestif
-    - nilerr
-    - nilnil
-    - nlreturn
-    - noctx
-    - nolintlint
-    - paralleltest
-    - prealloc
-    - predeclared
-    - promlinter
-    - revive
-    - rowserrcheck
-    - scopelint
-    - sqlclosecheck
-    - staticcheck
-    - structcheck
-    - stylecheck
-    - tagliatelle
-    - tenv
-    - testpackage
-    - thelper
-    - tparallel
-    - typecheck
-    - unconvert
-    - unparam
-    - unused
-    - varcheck
-    - varnamelen
-    - wastedassign
-    - whitespace
-    - wrapcheck
-    - wsl
 
-  # Enable presets.
-  # https://golangci-lint.run/usage/linters
-  presets:
-    - bugs
-    - comment
-    - complexity
-    - error
-    - format
-    - import
-    - metalinter
-    - module
-    - performance
-    - sql
-    - style
-    - test
-    - unused
 
   # Run only fast linters from enabled linters set (first run won't be fast)
   # Default: false
@@ -1814,7 +1562,7 @@ issues:
   new-from-rev: HEAD
 
   # Show only new issues created in git patch with set file path.
-  new-from-patch: path/to/patch/file
+  # new-from-patch: path/to/patch/file
 
   # Fix found issues (if it's supported by the linter).
   fix: true
