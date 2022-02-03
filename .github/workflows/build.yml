@@ -3,6 +3,12 @@ name: build
 permissions: read-all
 
 on:
+  push:
+    tags:
+      - v*
+    branches:
+      - master
+  pull_request:
   workflow_call:
     inputs:
       go:
