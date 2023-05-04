@@ -54,7 +54,7 @@ jobs:
         run: go test -v -tags -race -shuffle=on -coverprofile="coverage.txt" ./...
 
       - name: Upload Coverage
-        uses: codecov/codecov-action@d9f34f8cd5cb3b3eb79b3e4b5dae3a16df499a70 # v2.1.0
+        uses: codecov/codecov-action@40a12dcee2df644d47232dde008099a3e9e4f865 # v2.1.0
         if: matrix.os == 'ubuntu-latest'
         continue-on-error: true
         with:
