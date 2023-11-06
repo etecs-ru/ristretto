@@ -7,7 +7,7 @@ require (
 	github.com/dustin/go-humanize v1.0.1
 	github.com/stretchr/testify v1.8.1
 	github.com/zeebo/xxh3 v1.0.2
-	golang.org/x/sys v0.12.0
+	golang.org/x/sys v0.14.0
 )
 
 require (
